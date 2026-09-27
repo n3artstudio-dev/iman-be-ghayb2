@@ -1,2 +1,60 @@
-# iman-be-ghayb2
-3D playable educational game prototype - Behinesaz Bargh: Bushehr Mission
+# بالغیب · سامانهٔ تعاملی ایمان به غیب (`imanbeghayb`)
+
+> «الَّذِينَ يُؤْمِنُونَ بِالْغَيْبِ» — بقره ۳
+>
+> پیام‌رسانی که در آن هر کلمه زیر نگاه خداست؛ سینمایی از آیات؛ مسابقه‌ای برای شناختن؛ و سفری به معنای بودن.
+> ساخته‌شده برای **قرآن سینماتیک** — [@qurancinematic](https://www.instagram.com/qurancinematic/)
+> مخزن گیت‌هاب: [github.com/n3artstudio-dev/imanbeghayb](https://github.com/n3artstudio-dev/imanbeghayb)
+
+---
+
+## ✨ ویژگی‌های این نسخه
+
+1. **کارکرد ۱۰۰٪ بدون صفحهٔ ورود و بدون نیاز به ثبت‌نام:**
+   - تمام بخش‌های سامانه (**پیام‌ها، وضعیت ۲۴ ساعته، مخاطبین، سینمای آیات، مسابقهٔ ایمان به غیب، فیلم تعاملی سفر و نامهٔ عمل**) بلافاصله و بدون هیچ صفحهٔ لاگینی باز می‌شوند.
+   - فقط یک کادر ساده برای انتخاب **«نام نمایشی»** در بالای صفحه و صفحهٔ اصلی وجود دارد.
+2. **شناسایی و همگام‌سازی مخاطبین (`/contacts`):**
+   - شناسایی مخاطبین گوشی (Contact Picker API در اندروید و فایل `.vcf` در آیفون/اندروید)، افزودن مخاطب جدید فقط با نام نمایشی، و فهرست مخاطبین پیش‌فرض آمادهٔ گفتگو.
+3. **پنل مدیریت مستقیم در منو (`/admin`):**
+   - گزینهٔ **«پنل مدیریت»** هم در منوی کناری دسکتاپ، هم در نوار پایین موبایل و هم در صفحهٔ اصلی قرار دارد و مستقیماً باز می‌شود.
+   - امکان ویرایش **تمام نوشته‌ها و تنظیمات صفحهٔ اصلی**، **فایل‌ها و ویدیوهای سینمای آیات (همراه با آپلود پوستر)**، **آیات قرآن**، **سوالات چهارگزینه‌ای مسابقه**، **فصل‌ها و تصاویر فیلم «سفر»** و **مدیریت کاربران و مخاطبین (با خروجی اکسل CSV)**.
+
+---
+
+## 📦 بروزرسانی مخزن گیت‌هاب (`n3artstudio-dev/imanbeghayb`)
+
+در پوشهٔ پروژه دستورهای زیر را اجرا کنید:
+
+```bash
+git init
+git add .
+git commit -m "Update imanbeghayb: zero-login display name, contacts sync, and direct Admin CMS"
+git branch -M main
+git remote remove origin 2>/dev/null || true
+git remote add origin https://github.com/n3artstudio-dev/imanbeghayb.git
+git push -u origin main --force
+```
+
+> فایل `.env` در `.gitignore` قرار دارد تا اطلاعات محرمانه روی گیت‌هاب منتشر نشود.
+
+---
+
+## ▲ استقرار (Deploy) روی Vercel
+
+1. وارد [vercel.com](https://vercel.com) شوید و پروژهٔ متصل به مخزن `n3artstudio-dev/imanbeghayb` را باز کنید (یا از **Add New → Project** آن را Import کنید).
+2. برای اتصال دیتابیس دائمی:
+   - در داشبورد پروژه روی Vercel به تب **Storage** بروید.
+   - روی **Create Database** کلیک کنید و **Neon (Serverless Postgres)** را انتخاب و به پروژه وصل کنید.
+   - متغیر `DATABASE_URL` (و `POSTGRES_URL`) به‌صورت خودکار به تنظیمات Vercel اضافه می‌شود.
+3. روی **Deploy** (یا **Redeploy**) کلیک کنید.
+   - تمام جدول‌های دیتابیس، مخاطبین نمونه، ربات «همدم»، ویدیوهای سینمای آیات، آیات قرآن، سوالات مسابقه و فصل‌های «سفر» در اولین اجرا **به‌صورت کاملاً خودکار** ساخته می‌شوند.
+
+---
+
+## 🛠 اجرای محلی (Local Development)
+
+```bash
+npm install
+cp .env.example .env        # مقدار DATABASE_URL را تنظیم کنید
+npm run dev                 # اجرا روی http://localhost:3000
+```
